@@ -10,7 +10,7 @@ const navLinks = [
   { label: "Programs", href: "#programs" },
   { label: "Partners", href: "#partners" },
   { label: "Stories", href: "#stories" },
-  { label: "gallery", href: "#gallery" },
+  { label: "Gallery", href: "#gallery" },
 ]
 
 export function Navbar() {
