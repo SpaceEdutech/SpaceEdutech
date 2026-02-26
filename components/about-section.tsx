@@ -1,14 +1,12 @@
 "use client"
 
-import { useState } from "react"
 import Image from "next/image"
-import { Rocket, Satellite, Globe, GraduationCap, Briefcase, ChevronRight, TrendingUp } from "lucide-react"
+import { TrendingUp, ChevronRight, Rocket, Satellite, Globe } from "lucide-react"
+
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
 
-type StreamKey = "upstream" | "midstream" | "downstream"
+/* -------------------- DATA -------------------- */
 
 const marketIndicators = [
   { label: "Global Geospatial Market", value: "$100B+" },
@@ -18,23 +16,31 @@ const marketIndicators = [
 
 const streams = [
   {
-    key: "upstream" as StreamKey,
+    key: "upstream",
     label: "Upstream",
     icon: Rocket,
     schoolName: "School of Space Manufacturing",
     tagline: "Engineering Orbital Infrastructure",
-    marketSize: "$250\u2013300 Billion",
+    marketSize: "$250–300 Billion",
     description:
-      "Satellite manufacturing & launch systems. Focused on satellite design, subsystem integration, launch systems, space-grade materials, robotics, and orbital infrastructure engineering.",
+      "Satellite manufacturing & launch systems focused on spacecraft design, subsystem integration, launch systems, and orbital infrastructure.",
     heroImage: "/images/main1.jpg",
     focusAreas: [
-      { title: "Satellite Subsystem Integration", image: "/images/Satellite Subsystem Integration.jpg" },
-      { title: "Aerospace Structural Systems", image: "/images/Aerospace Structural Systems.jpg" },
-      { title: "Payload Integration & Validation", image: "/images/Payload Integration & Validation.jpg" },
+      { title: "Satellite Subsystem Integration", image: "/images/Satellite-Subsystem-Integration.jpg" },
+      { title: "Aerospace Structural Systems", image: "/images/Aerospace-Structural-Systems.jpg" },
+      { title: "Payload Integration & Validation", image: "/images/Payload-Integration-&-Validation.jpg" },
     ],
     academicPathways: [
-      { degree: "B.Voc \u2013 Space Manufacturing", university: "Kalinga University", image: "/images/space manufacturing.jpg" },
-      { degree: "B.Voc \u2013 Manufacturing", university: "Kalinga University", image: "/images/Manufacturing.jpg" },
+      {
+        degree: "B.Voc – Space Manufacturing",
+        university: "Kalinga University",
+        image: "/images/B.Voc-space-manufacturing.jpg",
+      },
+      {
+        degree: "B.Voc – Manufacturing",
+        university: "Kalinga University",
+        image: "/images/B.Voc-Manufacturing.jpg",
+      },
     ],
     careerRoles: [
       "Space Manufacturing Engineer",
@@ -44,22 +50,26 @@ const streams = [
     ],
   },
   {
-    key: "midstream" as StreamKey,
+    key: "midstream",
     label: "Midstream",
     icon: Satellite,
     schoolName: "School of Satellite Communication",
     tagline: "Sustaining Global Connectivity",
-    marketSize: "$300\u2013350 Billion",
+    marketSize: "$300–350 Billion",
     description:
-      "Satellite communication & infrastructure. Covers satellite communication architecture, ground stations, mission control, signal processing, and secure global connectivity infrastructure.",
+      "Satellite communication and ground infrastructure including mission control, signal processing, and secure global connectivity.",
     heroImage: "/images/midstream.jpg",
     focusAreas: [
-      { title: "Ground Station Engineering", image: "/images/Ground Station Engineering.jpg" },
+      { title: "Ground Station Engineering", image: "/images/Ground-Station-Engineering.jpg" },
       { title: "Mission Control Systems", image: "/images/mcs.jpg" },
-      { title: "Network & Signal Processing", image: "/images/Network & Signal Processing.jpg" },
+      { title: "Network & Signal Processing", image: "/images/Network-&-Signal-Processing.jpg" },
     ],
     academicPathways: [
-      { degree: "B.Voc \u2013 Satellite Communication Technology", university: "Aurora University, Hyderabad", image: "/images/B.Voc Satillite Communication Technology.jpg" },
+      {
+        degree: "B.Voc – Satellite Communication Technology",
+        university: "Aurora University, Hyderabad",
+        image: "/images/B.Voc-Satillite-Communication-Technology.jpg",
+      },
     ],
     careerRoles: [
       "Satellite Operations Engineer",
@@ -68,27 +78,46 @@ const streams = [
     ],
   },
   {
-    key: "downstream" as StreamKey,
+    key: "downstream",
     label: "Downstream",
     icon: Globe,
     schoolName: "School of Remote Sensing, GIS & Geo-AI",
     tagline: "Intelligence from Orbit",
-    marketSize: "$400\u2013450 Billion",
+    marketSize: "$400–450 Billion",
     description:
-      "GIS, Geo-AI & digital twin ecosystems. Transforms satellite data into insights using GIS, remote sensing, Geo-AI, digital twins, climate intelligence, and spatial analytics.",
+      "Transforms satellite data into insights using GIS, Geo-AI, digital twins, climate intelligence, and spatial analytics.",
     heroImage: "/images/Main Image.jpg",
     focusAreas: [
-      { title: "GIS & Spatial Analytics", image: "/images/GIS &Spatial Analytics.jpg" },
-      { title: "Geo-AI & Machine Learning", image: "/images/Geo-AI & Machine Learning.jpg" },
-      { title: "Digital Twin Ecosystems", image: "/images/Digital Twin Ecosystems.jpg" },
+      { title: "GIS & Spatial Analytics", image: "/images/GIS-&Spatial-Analytics.jpg" },
+      { title: "Geo-AI & Machine Learning", image: "/images/Geo-AI-&-Machine-Learning.jpg" },
+      { title: "Digital Twin Ecosystems", image: "/images/Digital-Twin-Ecosystems.jpg" },
     ],
     academicPathways: [
-      { degree: "M.Sc / M.Tech / Ph.D \u2013 Remote Sensing & GIS", university: "SHAUT University", image: "/images/rsg.jpg" },
-      { degree: "B.Voc \u2013 Information Technology", university: "Kalinga University", image: "/images/B.Voc Information Technology.jpg" },
-      { degree: "B.Voc \u2013 Software Development", university: "Kalinga University", image: "/images/sd.jpg" },
-      { degree: "B.Voc \u2013 Data Science", university: "Kalinga University", image: "/images/B.Voc Data Science.jpg" },
-      { degree: "B.Voc \u2013 Cyber Security", university: "Kalinga University", image: "/images/B.Voc Cyber Security.jpg" },
-      { degree: "B.Voc \u2013 Robotics", university: "Kalinga University", image: "/images/B.Voc Robotics.jpg" },
+      {
+        degree: "M.Sc – Remote Sensing & GIS",
+        university: "SHAUTS University",
+        image: "/images/rsg.jpg",
+      },
+      {
+        degree: "M.Tech – Remote Sensing & GIS",
+        university: "SHAUTS University",
+        image: "/images/rsg.jpg",
+      },
+      {
+        degree: "Ph.D – Remote Sensing & GIS(Full-Time)",
+        university: "SHAUTS University",
+        image: "/images/rsg.jpg",
+      },
+      {
+        degree: "Ph.D – Remote Sensing & GIS(Part-Time)",
+        university: "SHAUTS University",
+        image: "/images/rsg.jpg",
+      },
+      {
+        degree: "B.Voc – Data Science",
+        university: "Kalinga University",
+        image: "/images/B.Voc-Data-Science.jpg",
+      },
     ],
     careerRoles: [
       "Geo-AI Engineer",
@@ -99,20 +128,16 @@ const streams = [
   },
 ]
 
+/* -------------------- SMALL CARDS -------------------- */
+
 function FocusAreaCard({ title, image }: { title: string; image: string }) {
   return (
-    <Card className="group overflow-hidden border-border bg-card transition-all hover:-translate-y-1 hover:shadow-lg">
-      <div className="relative h-44 w-full overflow-hidden">
-        <Image
-          src={image}
-          alt={title}
-          fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 p-4">
-          <h4 className="text-sm font-semibold leading-snug text-white">{title}</h4>
+    <Card className="overflow-hidden">
+      <div className="relative h-44">
+        <Image src={image} alt={title} fill className="object-cover" />
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute bottom-3 left-3 text-sm font-semibold text-white">
+          {title}
         </div>
       </div>
     </Card>
@@ -129,216 +154,167 @@ function AcademicPathwayCard({
   image: string
 }) {
   return (
-    <Card className="group overflow-hidden border-border bg-card transition-all hover:-translate-y-1 hover:shadow-lg">
-      <div className="relative h-36 w-full overflow-hidden">
-        <Image
-          src={image}
-          alt={university}
-          fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 p-4">
-          <Badge className="mb-1.5 bg-primary/90 text-primary-foreground text-[10px]">
-            <GraduationCap className="mr-1 h-3 w-3" />
-            {university}
-          </Badge>
+    <Card className="overflow-hidden">
+      <div className="relative h-36">
+        <Image src={image} alt={degree} fill className="object-cover" />
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute bottom-3 left-3 text-xs text-white">
+          {university}
         </div>
       </div>
       <CardContent className="p-4">
-        <p className="text-sm font-semibold leading-snug text-foreground">{degree}</p>
+        <p className="text-sm font-semibold">{degree}</p>
       </CardContent>
     </Card>
   )
 }
 
+/* -------------------- MAIN SECTION -------------------- */
+
 export function AboutSection() {
-  const [activeStream, setActiveStream] = useState<StreamKey>("upstream")
-
-  const current = streams.find((s) => s.key === activeStream)!
-  const Icon = current.icon
-
   return (
     <section id="about" className="bg-card py-20">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
-        {/* Section Heading */}
-        <div className="mb-12 text-center">
+
+        {/* Heading */}
+        <div className="mb-16 text-center">
           <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-primary">
             Space Value Chain
           </p>
-          <h2 className="font-serif text-3xl font-bold tracking-tight text-foreground lg:text-4xl text-balance">
+          <h2 className="text-3xl font-bold lg:text-4xl">
             About SpaceTech Academy
           </h2>
-          <p className="mx-auto mt-4 max-w-3xl leading-relaxed text-muted-foreground">
-            We operate across the complete space ecosystem &mdash; from building
-            satellites to transforming data into intelligence. Explore our three
-            schools spanning Upstream, Midstream, and Downstream sectors of the
-            global space industry.
-          </p>
-        </div>
-
+          <p className="mx-auto mt-4 max-w-3xl text-muted-foreground">
+         About SpaceTech Academy
+         SpaceTech Academy is a Centre of Excellence in Space Manufacturing, Satellite Communications, Geospatial Intelligence, and Geo-AI, focused on higher education and professional skilling.
+         Aligned with India’s Indian Space Policy (2023), Indian Geospatial Policy (2021), and NEP 2020, we prepare industry-ready talent across the full space value chain.
+         In partnership with UGC-approved universities (D.Voc to Ph.D.), we deliver flexible online and hybrid programs integrated with applied labs, internships, real-world projects, and placement support—bridging education with industry.
+         Learn. Build. Launch. Lead.
+           </p>
+                 </div>
         {/* Market Indicators */}
-        <div className="mb-8 grid gap-4 sm:grid-cols-3">
+        <div className="mb-16 grid gap-4 sm:grid-cols-3">
           {marketIndicators.map((item) => (
-            <Card key={item.label} className="border-border bg-background">
+            <Card key={item.label}>
               <CardContent className="flex items-center gap-3 p-5">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                  <TrendingUp className="h-5 w-5 text-primary" />
-                </div>
+                <TrendingUp className="h-5 w-5 text-primary" />
                 <div>
                   <p className="text-xs text-muted-foreground">{item.label}</p>
-                  <p className="text-lg font-bold text-foreground">{item.value}</p>
+                  <p className="text-lg font-bold">{item.value}</p>
                 </div>
               </CardContent>
             </Card>
           ))}
         </div>
 
-        <p className="mb-10 text-center text-sm font-medium text-muted-foreground">
-          The demand for skilled professionals across these domains continues to
-          accelerate.
-        </p>
-
-        {/* Stream Selector */}
-        <div className="mb-12 flex flex-wrap justify-center gap-3">
+        {/* 🔘 STREAM BUTTONS */}
+        <div className="mb-20 flex flex-wrap justify-center gap-3">
           {streams.map((stream) => {
-            const StreamIcon = stream.icon
-            const isActive = activeStream === stream.key
+            const Icon = stream.icon
             return (
-              <button
+              <a
                 key={stream.key}
-                onClick={() => setActiveStream(stream.key)}
-                className={cn(
-                  "flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition-all",
-                  isActive
-                    ? "bg-primary text-primary-foreground shadow-md"
-                    : "border border-border text-foreground hover:bg-muted"
-                )}
+                href={`#${stream.key}`}
+                className="flex items-center gap-2 rounded-xl border px-6 py-3 text-sm font-semibold hover:bg-muted"
               >
-                <StreamIcon className="h-4 w-4" />
+                <Icon className="h-4 w-4 text-primary" />
                 {stream.label}
-                <Badge
-                  variant="secondary"
-                  className={cn(
-                    "ml-1 text-[10px]",
-                    isActive
-                      ? "bg-primary-foreground/20 text-primary-foreground"
-                      : "bg-muted text-muted-foreground"
-                  )}
-                >
+                <Badge variant="secondary" className="ml-1 text-[10px]">
                   {stream.marketSize}
                 </Badge>
-              </button>
+              </a>
             )
           })}
         </div>
 
-        {/* Stream Hero Card */}
-        <div className="mb-12 overflow-hidden rounded-2xl border border-border bg-background">
-          <div className="grid items-stretch lg:grid-cols-2">
-            <div className="relative h-64 lg:h-auto lg:min-h-[360px]">
-              <Image
-                src={current.heroImage}
-                alt={current.schoolName}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-black/10" />
-            </div>
+        {/* STREAM SECTIONS */}
+        {streams.map((stream) => {
+          const Icon = stream.icon
 
-            <div className="flex flex-col justify-center p-8 lg:p-12">
-              <Badge
-                variant="outline"
-                className="mb-3 w-fit text-xs text-primary border-primary/30"
-              >
-                {current.label} Sector
-              </Badge>
-
-              <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10">
-                  <Icon className="h-6 w-6 text-primary" />
+          return (
+            <div
+              key={stream.key}
+              id={stream.key}
+              className="mb-24 scroll-mt-32"
+            >
+              {/* Hero */}
+              <div className="mb-12 grid overflow-hidden rounded-2xl border lg:grid-cols-2">
+                <div className="relative h-64 lg:min-h-[360px]">
+                  <Image
+                    src={stream.heroImage}
+                    alt={stream.schoolName}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
-                <div>
-                  <p className="text-xs font-medium text-muted-foreground">
-                    {current.schoolName}
+
+                <div className="p-8 lg:p-12">
+                  <Badge className="mb-3">{stream.label} Sector</Badge>
+
+                  <div className="mb-4 flex items-center gap-3">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
+                      <Icon className="h-6 w-6 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground">
+                        {stream.schoolName}
+                      </p>
+                      <h3 className="text-2xl font-bold">
+                        {stream.tagline}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <p className="mb-4 text-muted-foreground">
+                    {stream.description}
                   </p>
-                  <h3 className="font-serif text-2xl font-bold text-foreground">
-                    {current.tagline}
-                  </h3>
+
+                  <Badge variant="secondary">
+                    Market Size: {stream.marketSize}
+                  </Badge>
                 </div>
               </div>
 
-              <p className="mb-6 leading-relaxed text-muted-foreground">
-                {current.description}
-              </p>
-
-              <Button size="sm" className="w-fit" asChild>
-                <a href="#programs">
-                  Explore Programs{" "}
-                  <ChevronRight className="ml-1 h-4 w-4" />
-                </a>
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        {/* Focus Areas */}
-        <div className="mb-12">
-          <h3 className="mb-6 text-center font-serif text-xl font-bold text-foreground">
-            Focus Areas
-          </h3>
-          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {current.focusAreas.map((area) => (
-              <FocusAreaCard key={area.title} title={area.title} image={area.image} />
-            ))}
-          </div>
-        </div>
-
-        {/* Academic Pathways - Image Cards */}
-        <div className="mb-12">
-          <div className="mb-6 flex items-center justify-center gap-2">
-            <GraduationCap className="h-5 w-5 text-primary" />
-            <h3 className="text-center font-serif text-xl font-bold text-foreground">
-              Academic Pathways
-            </h3>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {current.academicPathways.map((path) => (
-              <AcademicPathwayCard
-                key={path.degree}
-                degree={path.degree}
-                university={path.university}
-                image={path.image}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Career Roles */}
-        <Card className="border-border bg-background">
-          <CardContent className="p-6">
-            <div className="mb-4 flex items-center gap-2">
-              <Briefcase className="h-5 w-5 text-primary" />
-              <h3 className="font-serif text-lg font-bold text-foreground">
-                Career Roles
+              {/* Focus Areas */}
+              <h3 className="mb-6 text-center text-xl font-bold">
+                Focus Areas
               </h3>
+              <div className="mb-12 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+                {stream.focusAreas.map((area) => (
+                  <FocusAreaCard key={area.title} {...area} />
+                ))}
+              </div>
+
+              {/* Academic Pathways */}
+              <h3 className="mb-6 text-center text-xl font-bold">
+                Academic Pathways
+              </h3>
+              <div className="mb-12 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+                {stream.academicPathways.map((path) => (
+                  <AcademicPathwayCard key={path.degree} {...path} />
+                ))}
+              </div>
+
+              {/* Career Roles */}
+              <Card>
+                <CardContent className="p-6">
+                  <h3 className="mb-4 text-lg font-bold">Career Roles</h3>
+                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                    {stream.careerRoles.map((role) => (
+                      <div
+                        key={role}
+                        className="flex items-center gap-3 rounded-lg border p-4"
+                      >
+                        <ChevronRight className="h-4 w-4 text-primary" />
+                        <p className="text-sm font-semibold">{role}</p>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             </div>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {current.careerRoles.map((role) => (
-                <div
-                  key={role}
-                  className="flex items-center gap-3 rounded-lg border border-border p-4 transition-colors hover:bg-muted/50"
-                >
-                  <ChevronRight className="h-4 w-4 shrink-0 text-primary" />
-                  <p className="text-sm font-semibold text-foreground">{role}</p>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+          )
+        })}
       </div>
     </section>
   )
