@@ -185,12 +185,9 @@ export function AboutSection() {
             About SpaceTech Academy
           </h2>
           <p className="mx-auto mt-4 max-w-3xl text-muted-foreground">
-            SpaceTech Academy is a Centre of Excellence in Space Manufacturing, Satellite Communications, Geospatial Intelligence, and Geo-AI, 
-            focused on higher education and professional skilling.
-            Aligned with India’s Indian Space Policy (2023), Indian Geospatial Policy (2021), and NEP 2020 Education Policy
-            We prepare industry-ready talent across the full space value chain.    
-            In partnership with UGC-approved universities (D.Voc.B,Voc,BSC.B.Tech.M.Tech and Ph.D.), we deliver flexible online and hybrid programs integrated with applied labs, internships, real-world projects, and placement support—bridging education with industry.
-            Learn. Build. Launch. Lead.
+          Centre of Excellence in Space Manufacturing, SatCom, GIS, and Geo-AI
+          Delivering UGC-approved degrees and diplomas with industry-aligned skilling programs to prepare future-ready professionals for the rapidly expanding global space and geospatial economy.
+          Learn, Lead and Launch
            </p>
                  </div>
         {/* Market Indicators */}
