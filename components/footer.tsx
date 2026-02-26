@@ -9,7 +9,7 @@ const quickLinks = [
 ]
 
 const programs = [
-  "B.Voc Robotics",
+  "B.Voc Robo",
   "B.Voc Data Science",
   "B.Voc Cyber Security",
   "M.Sc Remote Sensing & GIS",
